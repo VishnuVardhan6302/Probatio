@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from "react";
+import  { useMemo, useState } from "react";
 import styled from "styled-components";
 
+import {useNavigate} from "react-router-dom"
+
 import NavSection from "../NavSection";
-import {Link} from "react-router-dom"
 /* =========================================================
    MOCK DATA
 ========================================================= */
@@ -12,10 +13,10 @@ const employees = [
     id: "EMP001",
     name: "Rahul Sharma",
     domain: "Development",
-    designation: "Frontend Developer",
+    employementType: "Full Time",
     joiningDate: "15 Apr 2025",
     probationEndDate: "14 Oct 2025",
-    status: "In Progress",
+    status: "Active",
     daysLeft: 12,
     image: "https://i.pravatar.cc/100?img=12",
   },
@@ -23,10 +24,10 @@ const employees = [
     id: "EMP002",
     name: "Priya Nair",
     domain: "Marketing",
-    designation: "Digital Marketer",
+    employementType: "Internship",
     joiningDate: "10 May 2025",
     probationEndDate: "09 Nov 2025",
-    status: "In Progress",
+    status: "Active",
     daysLeft: 27,
     image: "https://i.pravatar.cc/100?img=47",
   },
@@ -34,10 +35,10 @@ const employees = [
     id: "EMP003",
     name: "Amit Kumar",
     domain: "HR",
-    designation: "HR Executive",
+    employementType: "Internship",
     joiningDate: "01 May 2025",
     probationEndDate: "31 Oct 2025",
-    status: "Due Soon",
+    status: "InActive",
     daysLeft: 8,
     image: "https://i.pravatar.cc/100?img=11",
   },
@@ -45,10 +46,10 @@ const employees = [
     id: "EMP004",
     name: "Sneha Reddy",
     domain: "Sales",
-    designation: "Sales Executive",
+    employementType: "Full Time",
     joiningDate: "20 Apr 2025",
     probationEndDate: "19 Oct 2025",
-    status: "Extended",
+    status: "InActive",
     daysLeft: "-",
     image: "https://i.pravatar.cc/100?img=32",
   },
@@ -56,10 +57,10 @@ const employees = [
     id: "EMP005",
     name: "Karthik V",
     domain: "Design",
-    designation: "UI/UX Designer",
+    employementType: "Internship",
     joiningDate: "05 May 2025",
     probationEndDate: "04 Nov 2025",
-    status: "Completed",
+    status: "InActive",
     daysLeft: "-",
     image: "https://i.pravatar.cc/100?img=13",
   },
@@ -67,10 +68,10 @@ const employees = [
     id: "EMP006",
     name: "Arjun Reddy",
     domain: "Development",
-    designation: "Backend Developer",
+    employementType: "Full Time",
     joiningDate: "12 Apr 2025",
     probationEndDate: "11 Oct 2025",
-    status: "In Progress",
+    status: "Active",
     daysLeft: 9,
     image: "https://i.pravatar.cc/100?img=15",
   },
@@ -78,10 +79,10 @@ const employees = [
     id: "EMP007",
     name: "Ananya Rao",
     domain: "Marketing",
-    designation: "Marketing Executive",
+    employementType: "Full Time",
     joiningDate: "15 May 2025",
     probationEndDate: "14 Nov 2025",
-    status: "In Progress",
+    status: "Active",
     daysLeft: 32,
     image: "https://i.pravatar.cc/100?img=44",
   },
@@ -89,10 +90,10 @@ const employees = [
     id: "EMP008",
     name: "Vikram Singh",
     domain: "Development",
-    designation: "React Developer",
+    employementType: "Internship",
     joiningDate: "20 Apr 2025",
     probationEndDate: "19 Oct 2025",
-    status: "Due Soon",
+    status: "InActive",
     daysLeft: 5,
     image: "https://i.pravatar.cc/100?img=68",
   },
@@ -100,10 +101,10 @@ const employees = [
     id: "EMP009",
     name: "Meena Joseph",
     domain: "HR",
-    designation: "HR Manager",
+    employementType: "Full Time",
     joiningDate: "05 Apr 2025",
     probationEndDate: "04 Oct 2025",
-    status: "Completed",
+    status: "InActive",
     daysLeft: "-",
     image: "https://i.pravatar.cc/100?img=49",
   },
@@ -111,10 +112,10 @@ const employees = [
     id: "EMP010",
     name: "Rohit Kumar",
     domain: "Sales",
-    designation: "Sales Manager",
+    employementType: "Full Time",
     joiningDate: "18 Apr 2025",
     probationEndDate: "17 Oct 2025",
-    status: "In Progress",
+    status: "Active",
     daysLeft: 15,
     image: "https://i.pravatar.cc/100?img=60",
   },
@@ -122,10 +123,10 @@ const employees = [
     id: "EMP011",
     name: "Divya Sharma",
     domain: "Design",
-    designation: "Product Designer",
+    employementType: "Internship",
     joiningDate: "11 May 2025",
     probationEndDate: "10 Nov 2025",
-    status: "Extended",
+    status: "InActive",
     daysLeft: "-",
     image: "https://i.pravatar.cc/100?img=45",
   },
@@ -133,10 +134,10 @@ const employees = [
     id: "EMP012",
     name: "Manoj Kumar",
     domain: "Development",
-    designation: "Software Engineer",
+    employementType: "Full Time",
     joiningDate: "02 May 2025",
     probationEndDate: "01 Nov 2025",
-    status: "Completed",
+    status: "Active",
     daysLeft: "-",
     image: "https://i.pravatar.cc/100?img=51",
   },
@@ -144,10 +145,10 @@ const employees = [
     id: "EMP013",
     name: "Swathi R",
     domain: "Marketing",
-    designation: "Content Strategist",
+    employementType: "Full Time",
     joiningDate: "09 May 2025",
     probationEndDate: "08 Nov 2025",
-    status: "In Progress",
+    status: "Active",
     daysLeft: 24,
     image: "https://i.pravatar.cc/100?img=25",
   },
@@ -155,10 +156,10 @@ const employees = [
     id: "EMP014",
     name: "Suresh Babu",
     domain: "HR",
-    designation: "HR Executive",
+    employementType: "Internship",
     joiningDate: "13 Apr 2025",
     probationEndDate: "12 Oct 2025",
-    status: "Due Soon",
+    status: "InActive",
     daysLeft: 10,
     image: "https://i.pravatar.cc/100?img=52",
   },
@@ -166,10 +167,10 @@ const employees = [
     id: "EMP015",
     name: "Neha Kapoor",
     domain: "Sales",
-    designation: "Business Executive",
+    employementType: "Internship",
     joiningDate: "01 May 2025",
     probationEndDate: "31 Oct 2025",
-    status: "Completed",
+    status: "InActive",
     daysLeft: "-",
     image: "https://i.pravatar.cc/100?img=48",
   },
@@ -177,35 +178,14 @@ const employees = [
     id: "EMP016",
     name: "Akash Verma",
     domain: "Design",
-    designation: "UI Designer",
+    employementType: "Full Time",
     joiningDate: "17 May 2025",
     probationEndDate: "16 Nov 2025",
-    status: "In Progress",
+    status: "Active",
     daysLeft: 38,
     image: "https://i.pravatar.cc/100?img=14",
   },
 ];
-
-/* =========================================================
-   ICON COMPONENT
-========================================================= */
-
-const Icon = ({ children, size = 20 }) => (
-  <span
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: size,
-    }}
-  >
-    {children}
-  </span>
-);
-
-/* =========================================================
-   MAIN COMPONENT
-========================================================= */
 
 const ProbationDashboard=()=> {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -214,10 +194,15 @@ const ProbationDashboard=()=> {
   const [domainFilter, setDomainFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [dateRange, setDateRange] = useState("01 Apr 2025 – 30 Sep 2025");
   const [showFilter, setShowFilter] = useState(false);
 
   const itemsPerPage = 5;
+
+  const navigate = useNavigate();
+
+const handleViewDetails = (employeeId) => {
+  navigate(`/probation/${employeeId}`);
+};
 
   /* =======================================================
      COUNTS
@@ -386,19 +371,6 @@ const ProbationDashboard=()=> {
                 </p>
               </div>
             </TitleSection>
-
-            <DateSelector>
-              <span>▣</span>
-
-              <select
-                value={dateRange}
-                onChange={(e) => setDateRange(e.target.value)}
-              >
-                <option>01 Apr 2025 – 30 Sep 2025</option>
-                <option>01 Jan 2025 – 31 Mar 2025</option>
-                <option>01 Oct 2025 – 31 Dec 2025</option>
-              </select>
-            </DateSelector>
           </TitleRow>
 
           {/* =================================================
@@ -736,7 +708,7 @@ const ProbationDashboard=()=> {
                     <th>Employee ID</th>
                     <th>Name</th>
                     <th>Domain</th>
-                    <th>Designation</th>
+                    <th>Employement Type</th>
                     <th>Joining Date</th>
                     <th>Probation End Date</th>
                     <th>Status</th>
@@ -762,7 +734,7 @@ const ProbationDashboard=()=> {
 
                         <td>{employee.domain}</td>
 
-                        <td>{employee.designation}</td>
+                        <td>{employee.employementType}</td>
 
                         <td>{employee.joiningDate}</td>
 
@@ -783,8 +755,7 @@ const ProbationDashboard=()=> {
                         <td>
                           <ActionGroup>
                             <ViewButton
-                              onClick={() =>
-                                setSelectedEmployee(employee)
+                              onClick={() => handleViewDetails(employee.id)
                               }
                             >
                               View
