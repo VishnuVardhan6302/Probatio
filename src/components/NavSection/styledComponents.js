@@ -1,5 +1,5 @@
 
-import styled,{keyframes} from "styled-components";
+import styled  from "styled-components";
 
 export const NavbarContainer = styled.nav`
   width: 260px;
@@ -27,14 +27,7 @@ export const NavbarContainer = styled.nav`
 
 `;
 
-const animate =keyframes`
-from{
-transform:translateX(-100px);
-}to{
-transform:translateX(0px)
-}
 
-`
 
 export const Logo = styled.h2`
   margin: 0 0 30px 15px;
@@ -46,7 +39,7 @@ export const Logo = styled.h2`
   font-family:"Roboto";
   margin-bottom:15px;
 padding-bottom:0px;
-animation:${animate} 1s forwards;
+
 
 `;
 
@@ -101,7 +94,7 @@ width:85%;
 margin-bottom:20px;
 margin-top:0px;
 padding-top:0px;
-animation:${animate} 1s forwards;
+
 `
 
 

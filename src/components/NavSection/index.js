@@ -1,11 +1,4 @@
 
-import React from "react";
-import { RiHome4Line } from "react-icons/ri";
-import { MdOutlinePeopleAlt } from "react-icons/md";
-import { GrDomain } from "react-icons/gr";
-
-
-
 import { Link } from "react-router-dom";
 import {
   NavbarContainer,
@@ -16,8 +9,7 @@ import {
  
 } from "./styledComponents";
 
-const NavSection = () => {
-  return (
+const NavSection = ()=>(
     <NavbarContainer>
       <Logo>Hirenest</Logo>
       <Hr/>
@@ -29,7 +21,7 @@ const NavSection = () => {
         <NavItem as={Link} to="/employees">
          Employees
         </NavItem>
-        <NavItem as={Link} to="/Domains">
+        <NavItem as={Link} to="/domains">
          Domains
         </NavItem>
       
@@ -37,11 +29,11 @@ const NavSection = () => {
           Probation Dashboard
         </NavItem>
 
-        <NavItem as={Link} to="/probation-details">
+        <NavItem as={Link} to="/probation/:employeeId">
           Probation Details
         </NavItem>
 
-        <NavItem as={Link} to="/domain-wise-probation">
+        <NavItem as={Link} to="/probation/domain">
           Domain-wise Probation
         </NavItem>
 
@@ -49,7 +41,7 @@ const NavSection = () => {
           Documents
         </NavItem>
 
-        <NavItem as={Link} to="/upload-document">
+        <NavItem as={Link} to="/upload-documents">
           Upload Document
         </NavItem>
 
@@ -71,7 +63,7 @@ const NavSection = () => {
       </NavMenu>
     </NavbarContainer>
   );
-};
+
 
 export default NavSection;
 
